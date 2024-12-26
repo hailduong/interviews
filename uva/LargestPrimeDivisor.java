@@ -31,50 +31,43 @@ public class LargestPrimeDivisor {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		long number = input.nextLong();
+
 		while (number != 0) {
-			long lpd = findLargestPrimeDivisor(Math.abs(number));
-			System.out.println(lpd);
-			number = input.nextLong();
+			number = Math.abs(number); // Đảm bảo xử lý số dương
+			long largestPrimeDivisor = findLargestPrimeDivisor(number);
+			System.out.println(largestPrimeDivisor);
+			number = input.nextLong();  // Nhập số tiếp theo
 		}
-		input.close();
 	}
 
-	/**
-	 * Tìm ước số nguyên tố lớn nhất của n. Nếu n chỉ có một ước số nguyên tố hoặc không có, trả về -1
-	 */
-	public static long findLargestPrimeDivisor(long n) {
-		if (n < 2) return -1;
-		long originalN = n;
-		long largestPrime = -1;
-		int primeCount = 0;
+	// Phương thức tách logic tìm ước số nguyên tố lớn nhất
+	static long findLargestPrimeDivisor(long number) {
+		long largestPrimeDivisor = -1;
+		long primeDivisorCount = 0;
+		long sqrtOfNumber = (long) Math.sqrt(number);
 
-		// Kiểm tra ước số 2
-		if (n % 2 == 0) {
-			primeCount++;
-			largestPrime = 2;
-			while (n % 2 == 0) {
-				n /= 2;
+		for (long i = 2; i <= sqrtOfNumber; i++) {
+			boolean isPrimeDivisor = false;
+			while (number % i == 0) {
+				isPrimeDivisor = true;
+				largestPrimeDivisor = i;
+				number /= i;
+			}
+			if (isPrimeDivisor) {
+				primeDivisorCount++;
 			}
 		}
 
-		// Kiểm tra các số lẻ từ 3 đến sqrt(n)
-		for (long i = 3; i <= Math.sqrt(n); i += 2) {
-			if (n % i == 0) {
-				primeCount++;
-				largestPrime = i;
-				while (n % i == 0) {
-					n /= i;
-				}
-			}
+		if (number > 1) {
+			primeDivisorCount++;
+			largestPrimeDivisor = number;
 		}
 
-		// Nếu n còn lại là một số nguyên tố lớn hơn 2
-		if (n > 2) {
-			primeCount++;
-			largestPrime = n;
+		// Kiểm tra số lượng ước số nguyên tố
+		if (primeDivisorCount == 1) {
+			return -1; // Số chỉ có một ước số nguyên tố (như lũy thừa của một số nguyên tố)
 		}
 
-		// Nếu có hơn một ước số nguyên tố, trả về LPD, ngược lại trả về -1
-		return primeCount > 1 ? largestPrime : -1;
+		return largestPrimeDivisor;
 	}
 }

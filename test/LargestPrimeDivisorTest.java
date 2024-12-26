@@ -87,24 +87,25 @@ public class LargestPrimeDivisorTest {
     // Kiểm tra số là số mũ của một nguyên tố duy nhất (7^2), phải trả về -1.
   }
 
+  // Test khi số có nhiều ước số nguyên tố
   @Test
   public void testMultiplePrimeDivisors() {
-    String input = "30\n0\n"; // 30 = 2 * 3 * 5
-    String expectedOutput = "5";
-    provideInput(input);
-    LargestPrimeDivisor.main(new String[]{});
-    assertEquals(expectedOutput, getOutput());
-    // Kiểm tra số có nhiều ước số nguyên tố (2, 3, 5), phải trả về ước số nguyên tố lớn nhất là 5.
+    long number = 30; // 30 = 2 * 3 * 5
+    long expectedOutput = 5;
+
+    long actualOutput = LargestPrimeDivisor.findLargestPrimeDivisor(number);
+
+    assertEquals(expectedOutput, actualOutput);
   }
 
+  // Test khi số là 1, không có ước số nguyên tố
   @Test
   public void testNumberOne() {
-    String input = "1\n0\n";
-    String expectedOutput = "-1";
-    provideInput(input);
-    LargestPrimeDivisor.main(new String[]{});
-    assertEquals(expectedOutput, getOutput());
-    // Kiểm tra trường hợp N = 1, không có ước số nguyên tố, trả về -1.
+    long number = 1;
+    long expectedOutput = -1;
+
+    long actualOutput = LargestPrimeDivisor.findLargestPrimeDivisor(number);
+    assertEquals(expectedOutput, actualOutput);
   }
 
 
