@@ -32,27 +32,49 @@ public class LargestPrimeDivisor {
 		Scanner input = new Scanner(System.in);
 		long number = input.nextLong();
 		while (number != 0) {
-			number = (long) (Math.abs(number));
-			long largestPrimeDivisor = -1;
-			int numberOfPrimeDivisors = 0;
-			int sqrtOfNumber = (int) (Math.sqrt(number));
-			for (int i = 2; i <= sqrtOfNumber; i++) {
-				if (number % i == 0) {
-					numberOfPrimeDivisors++;
-					largestPrimeDivisor = i;
-					while (number % i == 0) {
-						number = number / i;
-					}
-				}
-			}
-			if (largestPrimeDivisor != -1 && number != 1) {
-				System.out.println(number);
-			} else if (numberOfPrimeDivisors <= 1) {
-				System.out.println(-1);
-			} else {
-				System.out.println(largestPrimeDivisor);
-			}
+			long lpd = findLargestPrimeDivisor(Math.abs(number));
+			System.out.println(lpd);
 			number = input.nextLong();
 		}
+		input.close();
+	}
+
+	/**
+	 * Tìm ước số nguyên tố lớn nhất của n. Nếu n chỉ có một ước số nguyên tố hoặc không có, trả về -1
+	 */
+	public static long findLargestPrimeDivisor(long n) {
+		if (n < 2) return -1;
+		long originalN = n;
+		long largestPrime = -1;
+		int primeCount = 0;
+
+		// Kiểm tra ước số 2
+		if (n % 2 == 0) {
+			primeCount++;
+			largestPrime = 2;
+			while (n % 2 == 0) {
+				n /= 2;
+			}
+		}
+
+		// Kiểm tra các số lẻ từ 3 đến sqrt(n)
+		for (long i = 3; i <= Math.sqrt(n); i += 2) {
+			if (n % i == 0) {
+				primeCount++;
+				largestPrime = i;
+				while (n % i == 0) {
+					n /= i;
+				}
+			}
+		}
+
+		// Nếu n còn lại là một số nguyên tố lớn hơn 2
+		if (n > 2) {
+			primeCount++;
+			largestPrime = n;
+		}
+
+		// Nếu có hơn một ước số nguyên tố, trả về LPD, ngược lại trả về -1
+		return primeCount > 1 ? largestPrime : -1;
 	}
 }
