@@ -37,7 +37,7 @@ public class LargestPrimeDivisorTest {
     System.setOut(systemOut);
   }
 
-  @Test
+  @Test()
   // Kiểm tra các số nhỏ: số nguyên tố (2), số có ước số nguyên tố lớn nhất (6, 100).
   public void testSmallNumbers() {
     String input = "2\n6\n100\n0\n";
