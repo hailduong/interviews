@@ -38,53 +38,53 @@ public class LargestPrimeDivisorTest {
   }
 
   @Test
+  // Kiểm tra các số nhỏ: số nguyên tố (2), số có ước số nguyên tố lớn nhất (6, 100).
   public void testSmallNumbers() {
     String input = "2\n6\n100\n0\n";
     String expectedOutput = "-1\n3\n5";
     provideInput(input);
     LargestPrimeDivisor.main(new String[]{});
     assertEquals(expectedOutput, getOutput());
-    // Kiểm tra các số nhỏ: số nguyên tố (2), số có ước số nguyên tố lớn nhất (6, 100).
   }
 
   @Test
+  // Kiểm tra số nguyên tố (17), không có ước số nguyên tố lớn nhất ngoài chính nó.
   public void testPrimeNumber() {
     String input = "17\n0\n";
     String expectedOutput = "-1";
     provideInput(input);
     LargestPrimeDivisor.main(new String[]{});
     assertEquals(expectedOutput, getOutput());
-    // Kiểm tra số nguyên tố (17), không có ước số nguyên tố lớn nhất ngoài chính nó.
   }
 
   @Test
+  // Kiểm tra số lớn (13195), có ước số nguyên tố lớn nhất là 29.
   public void testLargeNumber() {
     String input = "13195\n0\n";
     String expectedOutput = "29"; // Ước số nguyên tố lớn nhất của 13195 là 29
     provideInput(input);
     LargestPrimeDivisor.main(new String[]{});
     assertEquals(expectedOutput, getOutput());
-    // Kiểm tra số lớn (13195), có ước số nguyên tố lớn nhất là 29.
   }
 
   @Test
+  // Kiểm tra số âm (-100), phải tính giá trị tuyệt đối và tìm ước số nguyên tố lớn nhất.
   public void testNegativeNumbers() {
     String input = "-100\n0\n";
     String expectedOutput = "5";
     provideInput(input);
     LargestPrimeDivisor.main(new String[]{});
     assertEquals(expectedOutput, getOutput());
-    // Kiểm tra số âm (-100), phải tính giá trị tuyệt đối và tìm ước số nguyên tố lớn nhất.
   }
 
   @Test
+  // Kiểm tra số là số mũ của một nguyên tố duy nhất (7^2), phải trả về -1.
   public void testSinglePrimePower() {
     String input = "49\n0\n"; // 49 = 7^2
     String expectedOutput = "-1";
     provideInput(input);
     LargestPrimeDivisor.main(new String[]{});
     assertEquals(expectedOutput, getOutput());
-    // Kiểm tra số là số mũ của một nguyên tố duy nhất (7^2), phải trả về -1.
   }
 
   // Test khi số có nhiều ước số nguyên tố
